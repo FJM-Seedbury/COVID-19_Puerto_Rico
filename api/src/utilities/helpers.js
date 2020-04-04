@@ -32,3 +32,22 @@ export function setEventListener(element, listenerAction = () => { }, eventType 
     element.addEventListener(eventType, (e) => listenerAction(e));
     return element;
 }
+export function httpRequest(params, url) {
+    return new Promise(function (resolve, reject) {
+        var formData = new FormData();
+        formData.enctype = 'multipart/form-data';
+        //Convert JS data to JSON and append to form
+        formData.append('params', JSON.stringify(params));
+        //xhr is XMLHttpRequest. Transfer data between a webbrowser and a webserver.
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                resolve(JSON.parse(this.responseText));
+            } else if (this.status > 200) {
+                reject(new Error('statusCode=' + res.statusCode));
+            }
+        };
+        xhr.open('POST', url, true);
+        xhr.send(formData);
+    });
+}

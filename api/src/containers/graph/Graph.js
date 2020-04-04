@@ -25,11 +25,11 @@ export class Graph {
         this.xAxis = new XAxis(this.numberOfColumns, this.historicalData);
         this.view.style.gridTemplateAreas = getTemplateAreasColumns(this.numberOfColumns) + getTemplateAreasColumns(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
-        const currentDataElement = new DataPointElement('.', this.currentDayData.cases).view;
+        const currentDataElement = new DataPointElement('.', this.currentDayData.cases, this.numberOfRows, this.highestNumber).view;
         appendChildren(this.view,
             this.yAxis.view,
             ...this.historicalData.map(dataPoint => {
-                const dataElement = new DataPointElement('.', dataPoint.positive).view;
+                const dataElement = new DataPointElement('.', dataPoint.positive, this.numberOfRows, this.highestNumber).view;
                 return dataElement;
             }),
             currentDataElement,
@@ -50,49 +50,40 @@ export class Graph {
     }
 }
 class DataPointElement {
-    constructor(character = '.', numberValue) {
-        this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${character}</h3>`);
-        this.view.style.marginBottom = scaleFactorConverter(numberValue) + 'rem';
+    constructor(character = '.', numberValue, numberOfRows, highestNumber) {
+        const convertionFactor = highestNumber / numberOfRows;
+        console.log(convertionFactor);
+        this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${numberValue}</h3>`);
+        this.view.style.marginBottom = scaleFactorConverter(numberValue, convertionFactor) + 'rem';
         this.view.title = numberValue;
     }
 }
 class YAxis {
-    constructor(numberOfRows) {
-        console.log(numberOfRows);
-        this.view = elementFromHTMLString(`<h3 class=graph__yAxis></h3>`);
+    constructor(numberOfItems) {
+        const numberOfRows = (numberOfItems / 100);
+        const gridArea = 'yAxis__r';
+        let gridAreas = '';
+        this.view = appendChildren(elementFromHTMLString(`<span class=graph__yAxis></span>`),
+            ...Array.apply(null, Array(numberOfRows)).map((n, index) => {
+                const rowElement = elementFromHTMLString(`<h3 class=yAxis__row>${numberOfRows * ((numberOfRows - (index)) / numberOfRows) * 100}</h3>`);
+                rowElement.style.gridArea = gridArea + index;
+                gridAreas += `"${gridArea + index} "`;
+                return rowElement;
+            })
+        );
+        this.view.style.gridTemplateAreas = gridAreas;
+        this.view.style.gridTemplateRows = 'repeat(' + numberOfRows + ', 1fr)';
     }
 }
-// class XAxis {
-//     constructor(numberOfColumns,historicalData) {
-//         console.log(historicalData);
-//         this.historicalData = historicalData;
-
-//         this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
-//             ...Array.apply(null, Array(numberOfColumns)).map(() => {
-//             let xAxisColum = elementFromHTMLString('<h4 class=xAxis__column>|</h4>')
-//             // appendChildren(xAxisColum, elementFromHTMLString(`<h4 class=xAxis__dayNumber>${this.historicalData.map(data => {new Date(data.dateChecked).getDate()})}</h4>`))
-//             appendChildren(xAxisColum,elementFromHTMLString(`<h4 class=xAxis__dayNumber>2</h4>`))
-//             return xAxisColum;
-//         }));
-//         this.view.style.gridTemplateAreas = getTemplateAreas(numberOfColumns, 'xAxis__col');
-//         this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';
-//     }
-// }
 class XAxis {
     constructor(numberOfColumns, historicalData) {
-        console.log(historicalData.length);
-        console.log(numberOfColumns);
         this.historicalDataEdit = historicalData.map(data => new Date(data.dateChecked).getDate());
         this.historicalDataEdit.unshift('');
         this.historicalDataEdit.push(new Date().getDate());
-        console.log(this.historicalDataEdit);
-        this.view = elementFromHTMLString(`<span class=graph__xAxis></span>`);
-        for (let i = 0; i < this.historicalDataEdit.length; i++) {
-            let xAxisColum = elementFromHTMLString('<h4 class=xAxis__column>|</h4>');
-            xAxisColum.appendChild(elementFromHTMLString(`<h4 class=xAxis__dayNumber>${this.historicalDataEdit[i]}</h4>`));
-            this.view.appendChild(xAxisColum)
-        }
-        this.view.style.gridTemplateAreas = getTemplateAreasColumns(numberOfColumns, 'xAxis__col');
-        this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';
+        this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
+            ...this.historicalDataEdit.map(hData => elementFromHTMLString(`<h4 class=xAxis__column>${hData}</h4>`))
+        );
+        // this.view.style.gridTemplateAreas = getTemplateAreasColumns(numberOfColumns, 'xAxis__col');
+        // this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';
     }
 }

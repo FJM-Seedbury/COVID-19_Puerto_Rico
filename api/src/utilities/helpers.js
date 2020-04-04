@@ -66,8 +66,11 @@ export function scaleFactorConverter(value, scaleFactor = 1) {
     scaleFactor = scaleFactor / 10;
     return value * scaleFactor;
 }
-export function getTemplateAreasColumns(numberOfColumns, rowName = 'template') {
-    return `"${Array.apply(null, Array(numberOfColumns)).map(() => rowName).join(' ')}"`
+export function getTemplateAreasColumns(numberOfColumns, columnName = 'columns') {
+    return `"${Array.apply(null, Array(numberOfColumns)).map(() => columnName).join(' ')}"`;
+}
+export function getTemplateAreasRows(numberOfRows, rowName = 'rows') {
+    return Array.apply(null, Array(numberOfRows)).map(() => '"' + rowName + '"').join(' ');
 }
 export function parseDate(date) {
     return new Date(date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8));

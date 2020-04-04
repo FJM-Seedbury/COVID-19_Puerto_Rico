@@ -62,3 +62,6 @@ export function sortObjArray(property) {
         return result * sortOrder;
     };
 }
+export function parseDate(date) {
+    return new Date(date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8));
+}

@@ -11,4 +11,4 @@ import { Index } from './Index.js';
 window.onload = () => {
     const app = new Index();
     document.getElementById('root').appendChild(app.view);
-}
+} 

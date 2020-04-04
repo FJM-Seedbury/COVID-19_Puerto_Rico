@@ -68,4 +68,6 @@ export function scaleFactorConverter(value, scaleFactor = 1) {
 }
 export function getTemplateAreas(numberOfColumns, rowName = 'row') {
     return `"${Array.apply(null, Array(numberOfColumns)).map(() => rowName).join(' ')}"`
+export function parseDate(date) {
+    return new Date(date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8));
 }

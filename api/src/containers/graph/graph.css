@@ -9,6 +9,6 @@
 .graph__view {
     background-color: var(--light_grey);
     display: grid;
-    height: 10rem;
-    width: 10rem;
+    height: 50rem;
+    width: 70rem;
 }

@@ -7,12 +7,14 @@
  */
 
 import { elementFromHTMLString } from './utilities/renderer.js'
-import { httpRequest, sortObjArray } from './utilities/helpers.js';
+import { httpRequest, sortObjArray, setElementClassList, appendChildren } from './utilities/helpers.js';
 import { Graph } from './containers/graph/Graph.js';
 
 export class Index {
     constructor() {
-        this.view = elementFromHTMLString('<span class=index__view></span>');
+        this.view = appendChildren(elementFromHTMLString('<span class=index__view></span>'),
+            elementFromHTMLString('<h1 class=index__header>COVID-19 | Puerto Rico</h1>')
+        );
         Promise.all([
             httpRequest('http://covidtracking.com/api/states/daily?state=PR', 'GET'),
             httpRequest('https://corona.lmao.ninja/states', 'GET')
@@ -21,7 +23,7 @@ export class Index {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
                 this.currentDayData = responseArray[1].find(res => res.state == 'Puerto Rico');
                 this.graphView = new Graph(this.historicalData, this.currentDayData);
-                this.view.appendChild(this.graphView.view);
+                this.view.appendChild(setElementClassList(this.graphView.view, 'index__graph'));
             })
 
     }

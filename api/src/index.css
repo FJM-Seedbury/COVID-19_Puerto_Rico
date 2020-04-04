@@ -10,4 +10,18 @@
     height: 100vh;
     width: 100vw;
     background-color: var(--background_color);
+    display: grid;
+    grid-template-areas: 'index_header''index_graph';
+    grid-template-rows: auto 1fr;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.index__header {
+    margin: 5rem auto;
+}
+
+.index__graph {
+    grid-area: index_graph;
+    margin: 0 auto auto auto;
 }

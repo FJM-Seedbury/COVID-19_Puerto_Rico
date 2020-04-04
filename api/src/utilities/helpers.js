@@ -62,3 +62,10 @@ export function sortObjArray(property) {
         return result * sortOrder;
     };
 }
+export function scaleFactorConverter(value, scaleFactor = 1) {
+    scaleFactor = scaleFactor / 10;
+    return value * scaleFactor;
+}
+export function getTemplateAreas(numberOfColumns, rowName = 'row') {
+    return `"${Array.apply(null, Array(numberOfColumns)).map(() => rowName).join(' ')}"`
+}

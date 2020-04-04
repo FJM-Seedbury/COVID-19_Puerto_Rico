@@ -9,15 +9,26 @@
 .graph__view {
     background-color: var(--light_grey);
     display: grid;
-    height: 50rem;
-    width: 70rem;
+    grid-template-rows: 50rem auto;
+    height: fit-content;
+    width: calc(100vw - 10rem);
     align-items: flex-end;
     justify-content: center;
 }
 
 .graph__dataPoint {
-    display: flex;
-    height: fit-content;
-    width: fit-content;
     margin: auto auto 0 auto;
+    font-size: 2.4rem;
+}
+
+.graph__yAxis {
+    height: 100%;
+    background-color: blueviolet;
+}
+
+.graph__xAxis {
+    height: 100%;
+    background-color: blueviolet;
+    width: 100%;
+    grid-area: xAxis;
 }

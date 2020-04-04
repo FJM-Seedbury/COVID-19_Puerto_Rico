@@ -7,7 +7,7 @@
  */
 
 import { elementFromHTMLString } from '../../utilities/renderer.js';
-import { appendChildren } from '../../utilities/helpers.js';
+import { appendChildren, scaleFactorConverter, getTemplateAreas } from '../../utilities/helpers.js';
 
 export class Graph {
     constructor(historicalData, currentDayData) {
@@ -19,15 +19,38 @@ export class Graph {
     }
     renderLine() {
         this.numberOfColumns = this.historicalData.length + 2;
+        this.yAxis = new YAxis(this.numberOfColumns);
+        this.xAxis = new XAxis(this.numberOfColumns);
+        this.view.style.gridTemplateAreas = getTemplateAreas(this.numberOfColumns) + getTemplateAreas(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
+        const currentDataElement = new DataPointElement('.').view;
+        currentDataElement.style.marginBottom = scaleFactorConverter(this.currentDayData.cases) + 'rem';
         appendChildren(this.view,
-            elementFromHTMLString('<h3 class=graph__dataPoint>y</h3>'),
+            this.yAxis.view,
             ...this.historicalData.map(dataPoint => {
-                const dataElement = elementFromHTMLString('<h3 class=graph__dataPoint>h</h3>');
-                dataElement.style.marginBottom = ((dataPoint.positive * 2) / 10) + 'rem';
+                const dataElement = new DataPointElement('.').view;
+                dataElement.style.marginBottom = scaleFactorConverter(dataPoint.positive) + 'rem';
                 return dataElement;
             }),
-            elementFromHTMLString('<h3 class=graph__dataPoint>c</h3>')
+            currentDataElement,
+            this.xAxis.view
         );
+    }
+}
+class DataPointElement {
+    constructor(character = '.') {
+        this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${character}</h3>`);
+    }
+}
+class YAxis {
+    constructor(numberOfItems) {
+        console.log(numberOfItems);
+        this.view = elementFromHTMLString(`<h3 class=graph__yAxis></h3>`);
+    }
+}
+class XAxis {
+    constructor(numberOfItems) {
+        console.log(numberOfItems);
+        this.view = elementFromHTMLString(`<h3 class=graph__xAxis></h3>`);
     }
 }

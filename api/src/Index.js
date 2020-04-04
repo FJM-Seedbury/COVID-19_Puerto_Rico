@@ -16,7 +16,7 @@ export class Index {
             elementFromHTMLString('<h1 class=index__header>COVID-19 | Puerto Rico</h1>')
         );
         Promise.all([
-            httpRequest('http://covidtracking.com/api/states/daily?state=PR', 'GET'),
+            httpRequest('http://covidtracking.com/api/states/daily?state=NY', 'GET'),
             httpRequest('https://corona.lmao.ninja/states', 'GET')
         ])
             .then(responseArray => {

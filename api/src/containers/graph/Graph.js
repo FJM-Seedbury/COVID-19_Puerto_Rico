@@ -7,21 +7,23 @@
  */
 
 import { elementFromHTMLString } from '../../utilities/renderer.js';
-import { appendChildren, scaleFactorConverter, getTemplateAreas } from '../../utilities/helpers.js';
+import { appendChildren, scaleFactorConverter, getTemplateAreasColumns } from '../../utilities/helpers.js';
 
 export class Graph {
     constructor(historicalData, currentDayData) {
         this.historicalData = historicalData;
         this.currentDayData = currentDayData;
-        console.log(historicalData, currentDayData);
+        this.numberOfColumns = this.historicalData.length + 2;
+        this.highestNumber = this.findHighestValue();
+        this.numberOfRows = Math.ceil(this.highestNumber / 100) * 100;
+        console.log(historicalData, currentDayData, this.numberOfColumns, this.highestNumber);
         this.view = elementFromHTMLString('<span class=graph__view></span>');
         this.renderLine();
     }
     renderLine() {
-        this.numberOfColumns = this.historicalData.length + 2;
-        this.yAxis = new YAxis(this.numberOfColumns);
+        this.yAxis = new YAxis(this.numberOfRows);
         this.xAxis = new XAxis(this.numberOfColumns);
-        this.view.style.gridTemplateAreas = getTemplateAreas(this.numberOfColumns) + getTemplateAreas(this.numberOfColumns, 'xAxis');
+        this.view.style.gridTemplateAreas = getTemplateAreasColumns(this.numberOfColumns) + getTemplateAreasColumns(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
         const currentDataElement = new DataPointElement('.', this.currentDayData.cases).view;
         appendChildren(this.view,
@@ -34,6 +36,18 @@ export class Graph {
             this.xAxis.view
         );
     }
+    findHighestValue() {
+        let highestNumber = 0;
+        this.historicalData.forEach(hData => {
+            if (hData.positive > highestNumber) {
+                highestNumber = hData.positive;
+            }
+        });
+        if (this.currentDayData.cases > highestNumber) {
+            highestNumber = this.currentDayData.cases;
+        }
+        return highestNumber;
+    }
 }
 class DataPointElement {
     constructor(character = '.', numberValue) {
@@ -43,8 +57,8 @@ class DataPointElement {
     }
 }
 class YAxis {
-    constructor(numberOfItems) {
-        console.log(numberOfItems);
+    constructor(numberOfRows) {
+        console.log(numberOfRows);
         this.view = elementFromHTMLString(`<h3 class=graph__yAxis></h3>`);
     }
 }
@@ -54,7 +68,7 @@ class XAxis {
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
             ...Array.apply(null, Array(numberOfColumns)).map(() => elementFromHTMLString('<h4 class=xAxis__column>|</h4>'))
         );
-        this.view.style.gridTemplateAreas = getTemplateAreas(numberOfColumns, 'xAxis__col');
+        this.view.style.gridTemplateAreas = getTemplateAreasColumns(numberOfColumns, 'xAxis__col');
         this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';
     }
 }

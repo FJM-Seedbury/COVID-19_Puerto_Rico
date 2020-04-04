@@ -7,10 +7,23 @@
  */
 
 import { elementFromHTMLString } from '../../utilities/renderer.js';
+import { appendChildren } from '../../utilities/helpers.js';
 
 export class Graph {
     constructor(historicalData, currentDayData) {
+        this.historicalData = historicalData;
+        this.currentDayData = currentDayData;
         console.log(historicalData, currentDayData);
         this.view = elementFromHTMLString('<span class=graph__view></span>');
+        this.renderLine();
+    }
+    renderLine() {
+        this.numberOfColumns = this.historicalData.length + 2;
+        this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
+        appendChildren(this.view,
+            elementFromHTMLString('<h3 class=graph__dataPoint>y</h3>'),
+            ...this.historicalData.map(dataPoint => elementFromHTMLString('<h3 class=graph__dataPoint>h</h3>')),
+            elementFromHTMLString('<h3 class=graph__dataPoint>c</h3>')
+        );
     }
 }

@@ -11,4 +11,13 @@
     display: grid;
     height: 50rem;
     width: 70rem;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.graph__dataPoint {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    margin: auto auto 0 auto;
 }

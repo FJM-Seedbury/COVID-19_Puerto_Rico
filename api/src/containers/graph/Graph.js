@@ -20,7 +20,7 @@ export class Graph {
     renderLine() {
         this.numberOfColumns = this.historicalData.length + 2;
         this.yAxis = new YAxis(this.numberOfColumns);
-        this.xAxis = new XAxis(this.numberOfColumns);
+        this.xAxis = new XAxis(this.numberOfColumns, this.historicalData);
         this.view.style.gridTemplateAreas = getTemplateAreas(this.numberOfColumns) + getTemplateAreas(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
         const currentDataElement = new DataPointElement('.', this.currentDayData.cases).view;
@@ -49,10 +49,14 @@ class YAxis {
     }
 }
 class XAxis {
-    constructor(numberOfColumns) {
-        console.log(numberOfColumns);
+    constructor(numberOfColumns,historicalData) {
+        console.log(historicalData);
+        this.historicalData = historicalData;
+        
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
-            ...Array.apply(null, Array(numberOfColumns)).map(() => elementFromHTMLString('<h4 class=xAxis__column>|</h4>'))
+            ...Array.apply(null, Array(numberOfColumns)).map(() => appendChildren(elementFromHTMLString('<h4 class=xAxis__column>|</h4>'),
+            elementFromHTMLString('<h4 class=xAxis__dayNumber>numOfDay</h4>')
+            ))
         );
         this.view.style.gridTemplateAreas = getTemplateAreas(numberOfColumns, 'xAxis__col');
         this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';

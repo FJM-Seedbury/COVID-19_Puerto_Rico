@@ -7,7 +7,8 @@
  */
 
 .graph__view {
-    background-color: red;
-    height: 1000px;
-    width: 1000px;
+    background-color: var(--light_grey);
+    display: grid;
+    height: 10rem;
+    width: 10rem;
 }

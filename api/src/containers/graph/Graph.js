@@ -23,13 +23,11 @@ export class Graph {
         this.xAxis = new XAxis(this.numberOfColumns);
         this.view.style.gridTemplateAreas = getTemplateAreas(this.numberOfColumns) + getTemplateAreas(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
-        const currentDataElement = new DataPointElement('.').view;
-        currentDataElement.style.marginBottom = scaleFactorConverter(this.currentDayData.cases) + 'rem';
+        const currentDataElement = new DataPointElement('.', this.currentDayData.cases).view;
         appendChildren(this.view,
             this.yAxis.view,
             ...this.historicalData.map(dataPoint => {
-                const dataElement = new DataPointElement('.').view;
-                dataElement.style.marginBottom = scaleFactorConverter(dataPoint.positive) + 'rem';
+                const dataElement = new DataPointElement('.', dataPoint.positive).view;
                 return dataElement;
             }),
             currentDataElement,
@@ -38,8 +36,10 @@ export class Graph {
     }
 }
 class DataPointElement {
-    constructor(character = '.') {
+    constructor(character = '.', numberValue) {
         this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${character}</h3>`);
+        this.view.style.marginBottom = scaleFactorConverter(numberValue) + 'rem';
+        this.view.title = numberValue;
     }
 }
 class YAxis {

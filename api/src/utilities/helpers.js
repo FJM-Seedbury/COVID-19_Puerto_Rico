@@ -66,7 +66,7 @@ export function scaleFactorConverter(value, scaleFactor = 1) {
     scaleFactor = scaleFactor / 10;
     return value * scaleFactor;
 }
-export function getTemplateAreas(numberOfColumns, rowName = 'row') {
+export function getTemplateAreas(numberOfColumns, rowName = 'template') {
     return `"${Array.apply(null, Array(numberOfColumns)).map(() => rowName).join(' ')}"`
 }
 export function parseDate(date) {

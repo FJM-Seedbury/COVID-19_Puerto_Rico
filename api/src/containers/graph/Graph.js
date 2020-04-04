@@ -7,7 +7,7 @@
  */
 
 import { elementFromHTMLString } from '../../utilities/renderer.js';
-import { appendChildren, scaleFactorConverter, getTemplateAreasColumns } from '../../utilities/helpers.js';
+import { appendChildren, scaleFactorConverter, getTemplateAreasColumns, getMagnitude } from '../../utilities/helpers.js';
 
 export class Graph {
     constructor(historicalData, currentDayData) {
@@ -15,13 +15,14 @@ export class Graph {
         this.currentDayData = currentDayData;
         this.numberOfColumns = this.historicalData.length + 2;
         this.highestNumber = this.findHighestValue();
-        this.numberOfRows = Math.ceil(this.highestNumber / 100) * 100;
-        console.log(historicalData, currentDayData, this.numberOfColumns, this.highestNumber);
+        this.magnitude = getMagnitude(this.highestNumber);
+        this.numberOfRows = Math.ceil(this.highestNumber / this.magnitude) * this.magnitude;
+        console.log(historicalData, currentDayData, '\nnumberOfColumns: ' + this.numberOfColumns, '\nhighestNumber: ' + this.highestNumber, '\nmagnitude: ' + this.magnitude, '\nnumberOfRows: ' + this.numberOfRows);
         this.view = elementFromHTMLString('<span class=graph__view></span>');
         this.renderLine();
     }
     renderLine() {
-        this.yAxis = new YAxis(this.numberOfRows);
+        this.yAxis = new YAxis(this.numberOfRows, this.magnitude);
         this.xAxis = new XAxis(this.numberOfColumns, this.historicalData);
         this.view.style.gridTemplateAreas = getTemplateAreasColumns(this.numberOfColumns) + getTemplateAreasColumns(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
@@ -59,8 +60,8 @@ class DataPointElement {
     }
 }
 class YAxis {
-    constructor(numberOfItems) {
-        const numberOfRows = (numberOfItems / 100);
+    constructor(numberOfItems, magnitude) {
+        const numberOfRows = (numberOfItems / magnitude);
         const gridArea = 'yAxis__r';
         let gridAreas = '';
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__yAxis></span>`),

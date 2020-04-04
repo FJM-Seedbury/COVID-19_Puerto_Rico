@@ -75,3 +75,8 @@ export function getTemplateAreasRows(numberOfRows, rowName = 'rows') {
 export function parseDate(date) {
     return new Date(date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8));
 }
+export function getMagnitude(n) {
+    var order = Math.floor(Math.log(n) / Math.LN10
+        + 0.000000001); // because float math sucks like that
+    return Math.pow(10, order);
+}

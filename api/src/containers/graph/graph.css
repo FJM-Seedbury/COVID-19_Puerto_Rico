@@ -20,6 +20,8 @@
     margin: auto auto 0 auto;
     font-size: 2.4rem;
     cursor: default;
+    color: blueviolet;
+    /* background-color: cadetblue; */
 }
 
 .graph__yAxis {
@@ -33,4 +35,9 @@
     background-color: blueviolet;
     width: 100%;
     grid-area: xAxis;
+    display: flex;
+}
+
+.xAxis__column {
+    grid-area: xAxis__col;
 }

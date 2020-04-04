@@ -49,8 +49,12 @@ class YAxis {
     }
 }
 class XAxis {
-    constructor(numberOfItems) {
-        console.log(numberOfItems);
-        this.view = elementFromHTMLString(`<h3 class=graph__xAxis></h3>`);
+    constructor(numberOfColumns) {
+        console.log(numberOfColumns);
+        this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
+            ...Array.apply(null, Array(numberOfColumns)).map(() => elementFromHTMLString('<h4 class=xAxis__column>|</h4>'))
+        );
+        this.view.style.gridTemplateAreas = getTemplateAreas(numberOfColumns, 'xAxis__col');
+        this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';
     }
 }

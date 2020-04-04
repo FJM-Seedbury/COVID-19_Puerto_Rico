@@ -52,7 +52,10 @@ class XAxis {
     constructor(numberOfColumns) {
         console.log(numberOfColumns);
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
-            ...Array.apply(null, Array(numberOfColumns)).map(() => elementFromHTMLString('<h4 class=xAxis__column>|</h4>'))
+            ...Array.apply(null, Array(numberOfColumns)).map(() => {let axisColum = elementFromHTMLString('<h4 class=xAxis__column>|</h4>')
+            axisColum.classList.add('graph__axisColum');
+            return axisColum
+    })
         );
         this.view.style.gridTemplateAreas = getTemplateAreas(numberOfColumns, 'xAxis__col');
         this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';

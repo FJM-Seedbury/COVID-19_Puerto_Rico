@@ -41,3 +41,6 @@
 .xAxis__column {
     grid-area: xAxis__col;
 }
+.graph__axisColum{
+    width: inherit;
+}

@@ -53,7 +53,7 @@ class DataPointElement {
     constructor(character = '.', numberValue, numberOfRows, highestNumber) {
         const convertionFactor = highestNumber / numberOfRows;
         console.log(convertionFactor);
-        this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${numberValue}</h3>`);
+        this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${character}</h3>`);
         this.view.style.marginBottom = scaleFactorConverter(numberValue, convertionFactor) + 'rem';
         this.view.title = numberValue;
     }

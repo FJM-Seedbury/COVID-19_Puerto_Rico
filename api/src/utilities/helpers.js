@@ -32,7 +32,7 @@ export function setEventListener(element, listenerAction = () => { }, eventType 
     element.addEventListener(eventType, (e) => listenerAction(e));
     return element;
 }
-export function httpRequest(params, url) {
+export function httpRequest(url, method = 'POST', params = false) {
     return new Promise(function (resolve, reject) {
         var formData = new FormData();
         formData.enctype = 'multipart/form-data';
@@ -44,10 +44,21 @@ export function httpRequest(params, url) {
             if (this.readyState === 4 && this.status === 200) {
                 resolve(JSON.parse(this.responseText));
             } else if (this.status > 200) {
-                reject(new Error('statusCode=' + res.statusCode));
+                reject(new Error('statusCode=' + this.statusCode));
             }
         };
-        xhr.open('POST', url, true);
+        xhr.open(method, url, true);
         xhr.send(formData);
     });
+}
+export function sortObjArray(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a, b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    };
 }

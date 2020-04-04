@@ -22,7 +22,11 @@ export class Graph {
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
         appendChildren(this.view,
             elementFromHTMLString('<h3 class=graph__dataPoint>y</h3>'),
-            ...this.historicalData.map(dataPoint => elementFromHTMLString('<h3 class=graph__dataPoint>h</h3>')),
+            ...this.historicalData.map(dataPoint => {
+                const dataElement = elementFromHTMLString('<h3 class=graph__dataPoint>h</h3>');
+                dataElement.style.marginBottom = ((dataPoint.positive * 2) / 10) + 'rem';
+                return dataElement;
+            }),
             elementFromHTMLString('<h3 class=graph__dataPoint>c</h3>')
         );
     }

@@ -1,0 +1,10 @@
+/**
+ * styleSheet.css
+ * @author Francisco J. Medina <francisco@seedburysquare.com>
+ * @copyright Seedbury Square, LLC. All Rights Reserved.
+ * 
+ * @version 2020-04-04 Initial Version 
+ */
+
+@import './api/src/app.css';
+@import './api/src/index.css';

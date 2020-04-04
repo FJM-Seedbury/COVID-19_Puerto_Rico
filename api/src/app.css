@@ -1,0 +1,50 @@
+/**
+ * app.css
+ * @author Francisco J. Medina <francisco@seedburysquare.com>
+ * @copyright Seedbury Square, LLC. All Rights Reserved.
+ * 
+ * @version 2020-04-04 Initial Version 
+ */
+
+html {
+    /* 10/16 */
+    font-size: 62.5%;
+}
+
+* {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all ease .5s;
+    -o-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    transition: all ease .5s;
+}
+
+*:focus {
+    outline: none;
+}
+
+:root {
+    --backgroundColor: rgb(250, 250, 250);
+    --light_grey: rgb(230, 230, 230);
+    --grey: rgb(140, 140, 140);
+    --dark_grey: rgb(100, 100, 100);
+    /* Box Shadow */
+    --box-shadow: .1rem .1rem .8rem .1rem rgba(0, 0, 0, .1);
+    --box-shadow-hover: 0 .8rem 1.6rem 0 rgba(0, 0, 0, 0.2);
+    --box-shadow-hover-far: 0 .0rem .8rem .1rem rgba(0, 0, 0, 0.3);
+    --box-shadow-inset: inset 0 .1rem .1rem rgba(0, 0, 0, 0.075);
+    --text-shadow-hover: .15rem .15rem rgba(0, 0, 0, 0.075);
+    /* Borders */
+    --default_border: .1rem solid rgba(0, 0, 0, .1);
+    --rounded_border_radius: .4rem;
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+}

@@ -1,0 +1,25 @@
+/**
+ * mobileOptimization.css
+ * @author Francisco J. Medina <francisco@seedburysquare.com>
+ * @copyright Seedbury Square, LLC. All Rights Reserved.
+ * 
+ * @version 2020-04-04 Initial Version 
+ */
+
+/* Touch Screen Optimization */
+
+@media (hover: none) {
+    .scrollArea {
+        overflow: auto;
+    }
+}
+
+/*Mobile Optimization*/
+
+/* @media screen and (max-width:600px) { */
+
+@media screen and (max-width:800px) {
+    html {
+        font-size: 50%;
+    }
+}

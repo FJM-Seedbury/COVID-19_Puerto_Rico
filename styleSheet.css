@@ -9,3 +9,6 @@
 @import './api/src/app.css';
 @import './api/src/index.css';
 @import './api/src/containers/graph/graph.css';
+/* Must be last */
+
+@import './api/src/mobileOptimization.css';

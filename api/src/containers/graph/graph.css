@@ -40,4 +40,8 @@
 
 .xAxis__column {
     grid-area: xAxis__col;
+    width: inherit;
+}
+.xAxis__dayNumber{
+    
 }

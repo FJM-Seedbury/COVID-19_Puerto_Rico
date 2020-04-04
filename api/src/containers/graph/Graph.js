@@ -11,6 +11,6 @@ import { elementFromHTMLString } from '../../utilities/renderer.js';
 export class Graph {
     constructor(historicalData, currentDayData) {
         console.log(historicalData, currentDayData);
-        this.view = elementFromHTMLString('<span class=index__view></span>');
+        this.view = elementFromHTMLString('<span class=graph__view></span>');
     }
 }

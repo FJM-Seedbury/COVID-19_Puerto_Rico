@@ -1,11 +1,13 @@
 /**
- * styleSheet.css
+ * graph.css
  * @author Francisco J. Medina <francisco@seedburysquare.com>
  * @copyright Seedbury Square, LLC. All Rights Reserved.
  * 
  * @version 2020-04-04 Initial Version 
  */
 
-@import './api/src/app.css';
-@import './api/src/index.css';
-@import './api/src/containers/graph/graph.css';
+.graph__view {
+    background-color: red;
+    height: 1000px;
+    width: 1000px;
+}

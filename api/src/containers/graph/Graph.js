@@ -54,10 +54,13 @@ class XAxis {
         this.historicalData = historicalData;
         
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
-            ...Array.apply(null, Array(numberOfColumns)).map(() => appendChildren(elementFromHTMLString('<h4 class=xAxis__column>|</h4>'),
-            elementFromHTMLString('<h4 class=xAxis__dayNumber>numOfDay</h4>')
-            ))
-        );
+            ...Array.apply(null, Array(numberOfColumns)).map(() => {
+            let xAxisColum = elementFromHTMLString('<h4 class=xAxis__column>|</h4>')
+            // appendChildren(xAxisColum, elementFromHTMLString(`<h4 class=xAxis__dayNumber>${this.historicalData.map(data => {new Date(data.dateChecked).getDate()})}</h4>`))
+            appendChildren(xAxisColum, elementFromHTMLString(`<h4 class=xAxis__dayNumber>${2}</h4>`))
+
+            return xAxisColum;
+        }));
         this.view.style.gridTemplateAreas = getTemplateAreas(numberOfColumns, 'xAxis__col');
         this.view.style.gridTemplateColumns = 'repeat(' + numberOfColumns + ', 1fr)';
     }

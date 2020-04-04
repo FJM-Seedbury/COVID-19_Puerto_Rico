@@ -7,7 +7,7 @@
  */
 
 import { elementFromHTMLString } from './utilities/renderer.js'
-import { httpRequest, sortObjArray, setElementClassList, appendChildren } from './utilities/helpers.js';
+import { httpRequest, sortObjArray, setElementClassList, appendChildren, parseDate } from './utilities/helpers.js';
 import { Graph } from './containers/graph/Graph.js';
 
 export class Index {
@@ -23,8 +23,8 @@ export class Index {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
                 this.currentDayData = responseArray[1].find(res => res.state == 'Puerto Rico');
                 this.graphView = new Graph(this.historicalData, this.currentDayData);
-                this.view.appendChild(setElementClassList(this.graphView.view, 'index__graph'));                console.log('Parse date',parseDate(this.historicalData[0].date.toString()));
-                console.log('Parse date',parseDate(this.historicalData[0].date.toString()));
+                this.view.appendChild(setElementClassList(this.graphView.view, 'index__graph')); console.log('Parse date', parseDate(this.historicalData[0].date.toString()));
+                console.log('Parse date', parseDate(this.historicalData[0].date.toString()));
 
             })
 

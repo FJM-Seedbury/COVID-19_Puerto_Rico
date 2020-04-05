@@ -7,7 +7,7 @@
  */
 
 import { elementFromHTMLString } from './utilities/renderer.js'
-import { httpRequest, sortObjArray, setElementClassList, appendChildren, parseDate } from './utilities/helpers.js';
+import { httpRequest, sortObjArray, setElementClassList, appendChildren, getDateNoTime } from './utilities/helpers.js';
 import { Graph } from './containers/graph/Graph.js';
 
 export class Index {
@@ -26,9 +26,12 @@ export class Index {
         ])
             .then(responseArray => {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
-                // this.historicalData.push(responseArray[1].find(res => res.state == 'Puerto Rico'));
-                this.currentDayData = responseArray[1].find(res => res.state == 'Puerto Rico');
-                this.graphView = new Graph(this.historicalData, this.currentDayData);
+                console.log(getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)), getDateNoTime());
+                if (getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)).getTime() != getDateNoTime().getTime()) {
+                    this.historicalData.push({ positive: responseArray[1].find(res => res.state == 'Puerto Rico').cases, dateChecked: new Date() });
+                }
+                // this.currentDayData = responseArray[1].find(res => res.state == 'Puerto Rico');
+                this.graphView = new Graph(this.historicalData);
                 this.view.appendChild(setElementClassList(this.graphView.view, 'index__graph'));
             });
     }

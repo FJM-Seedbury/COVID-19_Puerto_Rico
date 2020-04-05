@@ -80,3 +80,6 @@ export function getMagnitude(n) {
         + 0.000000001); // because float math sucks like that
     return Math.pow(10, order);
 }
+export function getDateNoTime(date = new Date()) {
+    return new Date(date.getFullYear().toString(), date.getMonth().toString(), date.getDate().toString());
+}

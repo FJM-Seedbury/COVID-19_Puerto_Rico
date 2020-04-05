@@ -15,8 +15,8 @@
     grid-template-rows: repeat(3, auto);
     justify-content: center;
     align-items: flex-start;
-    padding-top: 2rem;
-    grid-gap: 2rem;
+    /* padding-top: 2rem; */
+    /* grid-gap: 2rem; */
 }
 
 .index__covid-image {

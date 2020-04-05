@@ -26,10 +26,16 @@
     html {
         font-size: 25%;
     }
+    .table__view span, .xAxis__column, .yAxis__row {
+        font-size: 6px;
+    }
 }
 
 @media screen and (max-width:400px) {
     html {
         font-size: 15%;
+    }
+    .table__view span, .xAxis__column, .yAxis__row {
+        font-size: 5px;
     }
 }

@@ -22,6 +22,7 @@ html {
     -o-transition: all ease .5s;
     -moz-transition: all ease .5s;
     transition: all ease .5s;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 *:focus {
@@ -29,7 +30,8 @@ html {
 }
 
 :root {
-    --background_color: rgb(250, 250, 250);
+    /* --background_color: rgb(250, 250, 250); */
+    --background_color: rgb(153, 153, 153);
     --light_grey: rgb(230, 230, 230);
     --grey: rgb(140, 140, 140);
     --dark_grey: rgb(100, 100, 100);
@@ -42,6 +44,12 @@ html {
     /* Borders */
     --default_border: .1rem solid rgba(0, 0, 0, .1);
     --rounded_border_radius: .4rem;
+    /* Custom Colors */
+    --axis_color: rgb(0, 208, 251);
+    --graphBackground_color: rgb(136, 154, 239);
+    --axis_color: rgb(235, 243, 250);
+    --graphBackground_color: rgb(240, 248, 255);
+    --axis_font_color: rgb(184,24,49);
 }
 
 #root {

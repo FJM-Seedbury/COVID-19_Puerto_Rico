@@ -13,7 +13,11 @@ import { Graph } from './containers/graph/Graph.js';
 export class Index {
     constructor() {
         this.view = appendChildren(elementFromHTMLString('<span class=index__view></span>'),
-            elementFromHTMLString('<h1 class=index__header>COVID-19 | Puerto Rico</h1>')
+            elementFromHTMLString('<img src="./api/src/img/Covid-dark.png" class=index__covid-image></img>'),
+            elementFromHTMLString('<h1 class=index__header>COVID-19 | Puerto Rico</h1>'),
+            // elementFromHTMLString('<h1 class=index__sS-header>Powered by</h1>'),
+            elementFromHTMLString('<img src="./api/src/img/Seedbury-Square-LogoHoriz.png" class=index__sS-image></img>'),
+
         );
         Promise.all([
             // httpRequest('http://covidtracking.com/api/states/daily?state=NY', 'GET'),

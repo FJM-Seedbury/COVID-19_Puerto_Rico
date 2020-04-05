@@ -7,48 +7,49 @@
  */
 
 .graph__view {
-    background-color: var(--light_grey);
+    background-color: var(--graphBackground_color);
     display: grid;
     grid-template-rows: 50rem auto;
     height: fit-content;
     width: calc(100vw - 10rem);
     align-items: flex-end;
     justify-content: center;
+    box-shadow: var(--box-shadow-hover);
+    border-radius: var(--rounded_border_radius);
 }
 
 .graph__dataPoint {
+    height: 1.2rem;
+    width: auto;
     margin: auto auto 0 auto;
-    font-size: 2.4rem;
+    font-size: 3rem;
     cursor: default;
-    color: blueviolet;
+    /* color: rgb(205, 3, 25); */
     /* background-color: cadetblue; */
 }
 
 .graph__yAxis {
     height: 100%;
-    width: 2.5rem;
-    background-color: blueviolet;
+    width: 4rem;
+    background-color: var(--axis_color);
     display: grid;
-    /* flex-direction: column;
-    justify-content: space-between; */
-}
-
-.yAxis__row {
-    /* grid-area: yAxis__r; */
+    border-radius: var(--rounded_border_radius) 0 0 0;
+    padding-top: 1rem;
 }
 
 .graph__xAxis {
-    height: 1.5rem;
-    background-color: blueviolet;
+    height: 4rem;
+    background-color: var(--axis_color);
     width: 100%;
     grid-area: xAxis;
     display: flex;
     align-items: center;
+    border-radius: 0 0 var(--rounded_border_radius) var(--rounded_border_radius);
 }
 
 .xAxis__column, .yAxis__row {
     /* grid-area: xAxis__col; */
     width: 100%;
     text-align: center;
-    color: white;
+    color: var(--axis_font_color);
 }

@@ -26,11 +26,11 @@ export class Graph {
         this.xAxis = new XAxis(this.numberOfColumns, this.historicalData);
         this.view.style.gridTemplateAreas = getTemplateAreasColumns(this.numberOfColumns) + getTemplateAreasColumns(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
-        const currentDataElement = new DataPointElement('.', this.currentDayData.cases, this.numberOfRows, this.highestNumber).view;
+        const currentDataElement = new DataPointElement(this.currentDayData.cases, this.numberOfRows, this.highestNumber).view;
         appendChildren(this.view,
             this.yAxis.view,
             ...this.historicalData.map(dataPoint => {
-                const dataElement = new DataPointElement('.', dataPoint.positive, this.numberOfRows, this.highestNumber).view;
+                const dataElement = new DataPointElement(dataPoint.positive, this.numberOfRows, this.highestNumber).view;
                 return dataElement;
             }),
             currentDataElement,
@@ -51,10 +51,12 @@ export class Graph {
     }
 }
 class DataPointElement {
-    constructor(character = '.', numberValue, numberOfRows, highestNumber) {
+    constructor(numberValue, numberOfRows, highestNumber) {
+        const character = '*';
         const convertionFactor = highestNumber / numberOfRows;
         console.log(convertionFactor);
-        this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${character}</h3>`);
+        // this.view = elementFromHTMLString(`<h3 class=graph__dataPoint>${character}</h3>`);
+        this.view = elementFromHTMLString('<img src="./api/src/img/Covid-dark.png" class=graph__dataPoint></img>');
         this.view.style.marginBottom = scaleFactorConverter(numberValue, convertionFactor) + 'rem';
         this.view.title = numberValue;
     }

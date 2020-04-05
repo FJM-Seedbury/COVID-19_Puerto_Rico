@@ -11,17 +11,35 @@
     width: 100vw;
     background-color: var(--background_color);
     display: grid;
-    grid-template-areas: 'index_header''index_graph';
-    grid-template-rows: auto 1fr;
+    grid-template-areas: 'index_img index_header''index_graph index_graph' 'sS_logo sS_logo';
+    grid-template-rows: repeat(3, auto);
     justify-content: center;
     align-items: flex-start;
+    padding-top: 2rem;
+    grid-gap: 2rem;
+}
+
+.index__covid-image {
+    height: 5rem;
+    width: auto;
+    margin: auto 1rem auto auto;
+    grid-area: index_img;
 }
 
 .index__header {
-    margin: 5rem auto;
+    margin: auto auto auto 0;
+    color: white;
+    font-size: 2.4rem;
 }
 
 .index__graph {
     grid-area: index_graph;
-    margin: 0 auto auto auto;
+    margin: 0 auto;
+}
+
+.index__sS-image {
+    height: 5rem;
+    width: auto;
+    grid-area: sS_logo;
+    margin: -5rem 0 auto auto;
 }

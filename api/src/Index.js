@@ -31,7 +31,7 @@ export class Index {
                     this.historicalData.push({ positive: puertoRico.cases, dateChecked: new Date() });
                     this.historicalDataForTable = [{ positive: puertoRico.cases, death: puertoRico.deaths, todayCases: puertoRico.todayCases, todayDeaths: puertoRico.todayDeaths }];
                 } else {
-                    this.historicalDataForTable = [{ positive: responseArray[0].positive, death: responseArray[0].death, todayCases: responseArray[0].positiveIncrease, todayDeaths: responseArray[0].deathIncrease }];
+                    this.historicalDataForTable = [{ positive: this.historicalData[this.historicalData.length - 1].positive, death: this.historicalData[this.historicalData.length - 1].death, todayCases: this.historicalData[this.historicalData.length - 1].positiveIncrease, todayDeaths: this.historicalData[this.historicalData.length - 1].deathIncrease }];
                 }
                 this.view.appendChild(setElementClassList(new Graph(this.historicalData).view, 'index__graph'));
                 this.view.appendChild(new Table(this.historicalDataForTable).view)

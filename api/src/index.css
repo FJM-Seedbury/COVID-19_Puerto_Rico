@@ -11,12 +11,13 @@
     width: 100vw;
     background-color: var(--background_color);
     display: grid;
-    grid-template-areas: 'index_img index_header''index_graph index_graph' 'sS_logo sS_logo';
+    grid-template-areas: 'index_img index_header''index_table index_table' 'index_graph index_graph' 'sS_logo sS_logo';
     grid-template-rows: auto auto 1fr;
     justify-content: center;
     align-items: flex-start;
     padding-top: 2rem;
-    grid-gap: 2rem;
+    /* grid-gap: 2rem; */
+    grid-column-gap: 2rem;
 }
 
 .index__covid-image {
@@ -42,4 +43,86 @@
     width: auto;
     grid-area: sS_logo;
     margin: 0 1rem auto auto;
+}
+.table__view{
+    grid-area: index_table;
+    display: grid;
+    grid-template-areas: 'table_confirmedToday table_deathToday table_confirmed table_death' 'table_confirmed-numberToday table_death-numberToday table_confirmed-number table_death-number';
+    width: auto;
+    /* height: 500px; */
+    grid-template-rows: 2rem 2rem;
+    grid-template-columns: 9rem;
+    /* border-style: solid; */
+    /* background-color:var(--graphBackground_color); */
+    background-color: var(--axis_color);
+    /* border-bottom: solid; */
+    border-width: 0.1rem;
+    border-radius: var(--rounded_border_radius);
+    /* position: absolute; */
+    margin: 0 0 0 auto;
+}
+
+.table__confirmedToday{
+    text-align: center;
+    grid-area: table_confirmedToday;
+    border-bottom: solid;
+    border-color: black;
+    /* border-color: var(--graphBackground_color); */
+    /* color: var(--axis_font_color); */
+    border-width: 1px;
+    
+}
+.table__deathToday{
+    text-align: center;
+    grid-area: table_deathToday;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: black;
+    /* border-color: var(--graphBackground_color); */
+
+    /* color: var(--axis_font_color); */
+}
+.table__confirmedNumberToday{
+    text-align: center;
+    grid-area: table_confirmed-numberToday;
+    color: var(--axis_font_color);
+    
+}
+.table__deathNumberToday{
+    text-align: center;
+    grid-area: table_death-numberToday;
+    color: var(--axis_font_color);
+
+}
+
+.table__confirmed{
+    text-align: center;
+    grid-area: table_confirmed;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: black;
+    /* border-color: var(--graphBackground_color); */
+    /* color: var(--axis_font_color); */
+}
+.table__death{
+    text-align: center;
+    grid-area: table_death;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: black;
+    /* border-color: var(--graphBackground_color); */
+
+    /* color: var(--axis_font_color); */
+}
+.table__confirmedNumber{
+    text-align: center;
+    grid-area: table_confirmed-number;
+    color: var(--axis_font_color);
+
+}
+.table__deathNumber{
+    text-align: center;
+    grid-area: table_death-number;
+    color: var(--axis_font_color);
+
 }

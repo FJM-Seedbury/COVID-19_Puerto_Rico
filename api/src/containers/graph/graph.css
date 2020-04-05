@@ -16,6 +16,7 @@
     justify-content: center;
     box-shadow: var(--box-shadow-hover);
     border-radius: var(--rounded_border_radius);
+    /* position: relative; */
 }
 
 .graph__dataPoint {
@@ -52,4 +53,9 @@
     width: 100%;
     text-align: center;
     color: var(--axis_font_color);
+}
+
+.graph__container{
+    width: auto;
+    height: auto;
 }

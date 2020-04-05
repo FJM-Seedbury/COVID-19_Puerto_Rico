@@ -77,5 +77,7 @@ class XAxis {
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__xAxis></span>`),
             ...this.historicalDataEdit.map(hData => elementFromHTMLString(`<h4 class=xAxis__column>${hData}</h4>`))
         );
+        this.view.style.gridTemplateAreas = getTemplateAreasColumns(this.historicalDataEdit.length, 'xAxis_col');
+        this.view.style.gridTemplateColumns = 'repeat(' + this.historicalDataEdit.length + ', 1fr)';
     }
 }

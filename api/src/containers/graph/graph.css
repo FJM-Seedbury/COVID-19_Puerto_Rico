@@ -11,7 +11,7 @@
     display: grid;
     grid-template-rows: 50rem auto;
     height: fit-content;
-    width: calc(100vw - 10rem);
+    width: calc(100vw - 5rem);
     align-items: flex-end;
     justify-content: center;
     box-shadow: var(--box-shadow-hover);
@@ -30,21 +30,23 @@
 
 .graph__yAxis {
     height: 100%;
-    width: 4rem;
+    width: auto;
     background-color: var(--axis_color);
     display: grid;
     border-radius: var(--rounded_border_radius) 0 0 0;
-    padding-top: 1rem;
+    padding: 1rem 1rem 0 1rem;
 }
 
 .graph__xAxis {
-    height: 4rem;
+    height: auto;
     background-color: var(--axis_color);
     width: 100%;
     grid-area: xAxis;
-    display: flex;
+    display: grid;
     align-items: center;
     border-radius: 0 0 var(--rounded_border_radius) var(--rounded_border_radius);
+    padding: 1rem 0 1rem 0;
+    justify-content: space-around;
 }
 
 .xAxis__column, .yAxis__row {
@@ -52,4 +54,5 @@
     width: 100%;
     text-align: center;
     color: var(--axis_font_color);
+    font-size: 1.2rem;
 }

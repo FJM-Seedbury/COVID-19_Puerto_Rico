@@ -26,6 +26,7 @@ export class Index {
         ])
             .then(responseArray => {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
+                // this.historicalData.push(responseArray[1].find(res => res.state == 'Puerto Rico'));
                 this.currentDayData = responseArray[1].find(res => res.state == 'Puerto Rico');
                 this.graphView = new Graph(this.historicalData, this.currentDayData);
                 this.view.appendChild(setElementClassList(this.graphView.view, 'index__graph'));

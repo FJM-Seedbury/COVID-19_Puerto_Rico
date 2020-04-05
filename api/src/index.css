@@ -44,13 +44,15 @@
     grid-area: sS_logo;
     margin: 0 1rem auto auto;
 }
+
 /* Top Tab */
+
 .table__view {
     grid-area: index_table;
     display: grid;
     grid-template-areas: 'table_confirmedToday table_deathToday table_confirmed table_death' 'table_confirmed-numberToday table_death-numberToday table_confirmed-number table_death-number';
     width: auto;
-    height: fit-content;
+    height: auto;
     grid-template-rows: 2rem 2rem;
     grid-template-columns: repeat(4, auto);
     background-color: var(--axis_color);
@@ -62,59 +64,41 @@
 }
 
 .table__confirmedToday {
-    text-align: center;
     grid-area: table_confirmedToday;
-    border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
-    border-width: .1rem;
 }
 
 .table__deathToday {
-    text-align: center;
     grid-area: table_deathToday;
-    border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
-}
-
-.table__confirmedNumberToday {
-    padding-top: .5rem;
-    text-align: center;
-    grid-area: table_confirmed-numberToday;
-    color: var(--axis_font_color);
-}
-
-.table__deathNumberToday {
-    padding-top: .5rem;
-    text-align: center;
-    grid-area: table_death-numberToday;
-    color: var(--axis_font_color);
 }
 
 .table__confirmed {
-    text-align: center;
     grid-area: table_confirmed;
-    border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
 }
 
 .table__death {
-    text-align: center;
     grid-area: table_death;
+}
+
+.table__confirmedToday, .table__deathToday, .table__confirmed, .table__death {
+    text-align: center;
     border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
+}
+
+.table__deathNumberToday {
+    grid-area: table_death-numberToday;
 }
 
 .table__confirmedNumber {
-    padding-top: .5rem;
-    text-align: center;
     grid-area: table_confirmed-number;
-    color: var(--axis_font_color);
 }
 
 .table__deathNumber {
+    grid-area: table_death-number;
+}
+
+.table__confirmedNumberToday, .table__deathNumberToday, .table__confirmedNumber, .table__deathNumber {
     padding-top: .5rem;
     text-align: center;
-    grid-area: table_death-number;
     color: var(--axis_font_color);
 }
 

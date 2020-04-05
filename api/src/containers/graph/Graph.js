@@ -44,6 +44,7 @@ export class Graph {
         return highestNumber;
     }
 }
+
 class DataPointElement {
     constructor(numberValue, numberOfRows, highestNumber) {
         const character = '*';

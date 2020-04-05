@@ -26,13 +26,36 @@ export class Index {
         ])
             .then(responseArray => {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
+                this.historicalDataForTable = responseArray[0].sort(sortObjArray('date'));
+
                 console.log(getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)), getDateNoTime());
                 if (getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)).getTime() != getDateNoTime().getTime()) {
-                    this.historicalData.push({ positive: responseArray[1].find(res => res.state == 'Puerto Rico').cases, dateChecked: new Date() });
+                    this.historicalData.push({ positive: responseArray[1].find(res => res.state == 'Puerto Rico').cases, dateChecked: new Date(), death: responseArray[1].find(res => res.state == 'Puerto Rico').deaths, todayCases: responseArray[1].find(res => res.state == 'Puerto Rico').todayCases, todayDeaths: responseArray[1].find(res => res.state == 'Puerto Rico').todayDeaths });
+                    this.historicalDataForTable.push({ positive: responseArray[1].find(res => res.state == 'Puerto Rico').cases, dateChecked: new Date(), death: responseArray[1].find(res => res.state == 'Puerto Rico').deaths, todayCases: responseArray[1].find(res => res.state == 'Puerto Rico').todayCases, todayDeaths: responseArray[1].find(res => res.state == 'Puerto Rico').todayDeaths });
+                } else {
+                    this.historicalDataForTable.push({ positive: responseArray[0].positive, death: responseArray[0].death, todayCases: responseArray[0].positiveIncrease, todayDeaths: responseArray[10].deathIncrease });
                 }
-                // this.currentDayData = responseArray[1].find(res => res.state == 'Puerto Rico');
+                this.currentDayData = responseArray[1].find(res => res.state == 'Puerto Rico');
                 this.graphView = new Graph(this.historicalData);
                 this.view.appendChild(setElementClassList(this.graphView.view, 'index__graph'));
+                this.view.appendChild(new Table(this.historicalDataForTable).view)
             });
+    }
+}
+class Table {
+    constructor(historicalData) {
+        console.log(historicalData);
+        this.lastItemOfArray = historicalData.slice(-1).pop();
+        this.view = appendChildren(elementFromHTMLString('<span class=table__view></span>'),
+            elementFromHTMLString('<span class=table__confirmedToday>Confirmados Hoy</span>'),
+            elementFromHTMLString(`<span class=table__confirmedNumberToday>${this.lastItemOfArray.todayCases}</span>`),
+            elementFromHTMLString('<span class=table__deathToday>Muertos Hoy</span>'),
+            elementFromHTMLString(`<span class=table__deathNumberToday>${this.lastItemOfArray.todayDeaths}</span>`),
+
+            elementFromHTMLString('<span class=table__confirmed>Total Confirmados</span>'),
+            elementFromHTMLString(`<span class=table__confirmedNumber>${this.lastItemOfArray.positive}</span>`),
+            elementFromHTMLString('<span class=table__death>Total de Muertos</span>'),
+            elementFromHTMLString(`<span class=table__deathNumber>${this.lastItemOfArray.death}</span>`),
+        )
     }
 }

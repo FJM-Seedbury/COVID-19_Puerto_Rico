@@ -16,6 +16,7 @@
     justify-content: center;
     box-shadow: var(--box-shadow-hover);
     border-radius: var(--rounded_border_radius);
+    /* position: relative; */
 }
 
 .graph__dataPoint {
@@ -50,9 +51,13 @@
 }
 
 .xAxis__column, .yAxis__row {
-    /* grid-area: xAxis__col; */
     width: 100%;
     text-align: center;
     color: var(--axis_font_color);
     font-size: 1rem;
+}
+
+.graph__container{
+    width: auto;
+    height: auto;
 }

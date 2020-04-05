@@ -16,16 +16,20 @@
 
 /*Mobile Optimization*/
 
-/* @media screen and (max-width:600px) { */
-
 @media screen and (max-width:800px) {
+    html {
+        font-size: 50%;
+    }
+    .graph__xAxis {
+        padding: 1rem 0 1rem 1rem;
+    }
+}
+
+@media screen and (max-width:600px) {
     html {
         font-size: 50%;
     }
     .graph__xAxis {
         padding: 1rem 0 1rem 2rem;
     }
-    /* .xAxis__column, .yAxis__row {
-        font-size: .8rem;
-    } */
 }

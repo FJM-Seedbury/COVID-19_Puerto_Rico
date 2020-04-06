@@ -51,7 +51,7 @@
         font-size: 6px;
     }
     .graph__xAxis {
-        padding: 1rem 1rem 1rem 0;
+        padding: 1rem 1rem 1rem .5rem;
     }
 }
 

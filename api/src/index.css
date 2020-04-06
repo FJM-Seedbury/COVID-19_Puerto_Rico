@@ -7,7 +7,7 @@
  */
 
 .index__view {
-    height: 150%;
+    height: 120%;
     width: 100vw;
     background-color: var(--background_color);
     display: grid;

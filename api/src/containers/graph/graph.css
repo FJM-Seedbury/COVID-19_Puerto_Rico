@@ -33,7 +33,7 @@
     background-color: var(--axis_color);
     display: grid;
     border-radius: var(--rounded_border_radius) 0 0 0;
-    padding: 1rem 1rem 0 1rem;
+    padding: 1rem 0 0 0;
 }
 
 .graph__xAxis {

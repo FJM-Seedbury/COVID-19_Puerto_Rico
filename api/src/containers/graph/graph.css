@@ -9,7 +9,7 @@
 .graph__view {
     background-color: var(--graphBackground_color);
     display: grid;
-    grid-template-rows: 50rem auto;
+    grid-template-rows: repeat(2, auto);
     height: fit-content;
     width: calc(100vw - 5rem);
     align-items: flex-end;
@@ -17,6 +17,7 @@
     box-shadow: var(--box-shadow-hover);
     border-radius: var(--rounded_border_radius) 0 var(--rounded_border_radius) var(--rounded_border_radius);
     margin-bottom: 3rem;
+    padding-top: 3rem;
 }
 
 .graph__dataPoint {
@@ -28,7 +29,7 @@
 }
 
 .graph__yAxis {
-    height: 100%;
+    height: calc(100% + 3rem);
     width: auto;
     background-color: var(--axis_color);
     display: grid;

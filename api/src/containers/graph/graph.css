@@ -31,7 +31,7 @@
 .graph__yAxis {
     /* height: calc(100% + 3rem); */
     position: relative;
-    height: fit-content;
+    height: 100%;
     width: auto;
     background-color: var(--axis_color);
     /* display: grid; */

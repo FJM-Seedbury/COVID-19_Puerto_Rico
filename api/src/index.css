@@ -7,12 +7,12 @@
  */
 
 .index__view {
-    height: fit-content;
+    height: auto;
     width: 100vw;
     background-color: var(--background_color);
     display: grid;
     grid-template-areas: 'index_img index_header''index_table index_table' 'index_graph index_graph' 'sS_logo sS_logo';
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     justify-content: center;
     align-items: flex-start;
     padding-top: 2rem;

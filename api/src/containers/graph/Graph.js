@@ -21,10 +21,12 @@ export class Graph {
         this.highestNumber = this.findHighestValue();
         this.magnitude = getMagnitude(this.highestNumber);
         this.numberOfRows = Math.floor(this.highestNumber / this.magnitude) * this.magnitude;
+        this.convertionFactor = this.numberOfRows / this.highestNumber;
+        // this.convertionFactor = 5;
+        console.log(this.convertionFactor);
         this.view = elementFromHTMLString('<span class=graph__view></span>');
-        this.view.style.height = (Math.ceil(this.highestNumber / this.magnitude) * this.magnitude) / 10 + 'rem';
+        this.view.style.height = (((Math.ceil(this.highestNumber / this.magnitude) * this.magnitude) / 10) / 2) + 3 + 'rem';
         this.renderLine();
-        console.log('highestNumber', this.highestNumber, 'this.magnitude', this.magnitude);
     }
     renderLine() {
         this.yAxis = new YAxis(this.numberOfRows, this.magnitude);
@@ -54,9 +56,8 @@ export class Graph {
 
 class DataPointElement {
     constructor(numberValue, numberOfRows, highestNumber) {
-        const convertionFactor = highestNumber / numberOfRows;
         this.view = elementFromHTMLString('<img src="./api/src/img/Covid-dark.png" class=graph__dataPoint></img>');
-        this.view.style.marginBottom = `${numberValue / 10}rem`;
+        this.view.style.marginBottom = `${scaleFactorConverter(numberValue, this.convertionFactor) / 2}rem`;
         this.view.title = numberValue;
     }
 }
@@ -72,7 +73,7 @@ class YAxis {
                 // rowElement.style.gridArea = gridArea + index;
                 // rowElement.style.gridArea = gridArea;
                 // gridAreas += `"${gridArea + index} "`;
-                rowElement.style.bottom = value / 10 + 'rem';
+                rowElement.style.bottom = scaleFactorConverter(value, this.convertionFactor) / 2 + 'rem';
                 return rowElement;
             })
         );

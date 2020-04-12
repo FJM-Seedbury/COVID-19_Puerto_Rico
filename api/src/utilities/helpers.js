@@ -64,6 +64,7 @@ export function sortObjArray(property) {
 }
 export function scaleFactorConverter(value, scaleFactor = 1) {
     scaleFactor = scaleFactor / 10;
+    console.log(value * scaleFactor);
     return value * scaleFactor;
 }
 export function getTemplateAreasColumns(numberOfColumns, columnName = 'columns') {

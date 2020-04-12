@@ -21,7 +21,7 @@
 }
 
 .graph__dataPoint {
-    height: 1rem;
+    height: .6rem;
     width: auto;
     margin: auto auto 0 auto;
     font-size: 3rem;

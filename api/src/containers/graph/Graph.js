@@ -22,14 +22,14 @@ export class Graph {
         this.magnitude = getMagnitude(this.highestNumber);
         this.numberOfRows = Math.floor(this.highestNumber / this.magnitude) * this.magnitude;
         this.convertionFactor = this.numberOfRows / this.highestNumber;
-        // this.convertionFactor = 5;
+        this.divisor = 2;
         console.log(this.convertionFactor);
         this.view = elementFromHTMLString('<span class=graph__view></span>');
-        this.view.style.height = (((Math.ceil(this.highestNumber / this.magnitude) * this.magnitude) / 10) / 2) + 3 + 'rem';
+        this.view.style.height = (((Math.ceil(this.highestNumber / this.magnitude) * this.magnitude) / 10) / this.divisor) + 3 + 'rem';
         this.renderLine();
     }
     renderLine() {
-        this.yAxis = new YAxis(this.numberOfRows, this.magnitude);
+        this.yAxis = new YAxis(this.numberOfRows, this.magnitude, this.divisor);
         this.xAxis = new XAxis(this.historicalData);
         this.view.style.gridTemplateAreas = getTemplateAreasColumns(this.numberOfColumns) + getTemplateAreasColumns(this.numberOfColumns, 'xAxis');
         this.view.style.gridTemplateColumns = 'repeat(' + this.numberOfColumns + ', 1fr)';
@@ -37,7 +37,7 @@ export class Graph {
             this.yAxis.view,
             ...this.historicalData.map((dataPoint, index) => {
                 let numberValue = dataPoint.positive;
-                const dataElement = new DataPointElement(numberValue, this.numberOfRows, this.highestNumber).view;
+                const dataElement = new DataPointElement(numberValue, this.numberOfRows, this.highestNumber, this.divisor).view;
                 return dataElement;
             }),
             this.xAxis.view
@@ -55,14 +55,14 @@ export class Graph {
 }
 
 class DataPointElement {
-    constructor(numberValue, numberOfRows, highestNumber) {
+    constructor(numberValue, numberOfRows, highestNumber, divisor) {
         this.view = elementFromHTMLString('<img src="./api/src/img/Covid-dark.png" class=graph__dataPoint></img>');
-        this.view.style.marginBottom = `${scaleFactorConverter(numberValue, this.convertionFactor) / 2}rem`;
+        this.view.style.marginBottom = `${scaleFactorConverter(numberValue, this.convertionFactor) / divisor}rem`;
         this.view.title = numberValue;
     }
 }
 class YAxis {
-    constructor(numberOfItems, magnitude) {
+    constructor(numberOfItems, magnitude, divisor) {
         const numberOfRows = (numberOfItems / magnitude);
         const gridArea = 'yAxis__r';
         let gridAreas = 'test';
@@ -73,7 +73,7 @@ class YAxis {
                 // rowElement.style.gridArea = gridArea + index;
                 // rowElement.style.gridArea = gridArea;
                 // gridAreas += `"${gridArea + index} "`;
-                rowElement.style.bottom = scaleFactorConverter(value, this.convertionFactor) / 2 + 'rem';
+                rowElement.style.bottom = scaleFactorConverter(value, this.convertionFactor) / divisor + 'rem';
                 return rowElement;
             })
         );

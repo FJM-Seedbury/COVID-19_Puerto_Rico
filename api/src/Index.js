@@ -45,7 +45,7 @@ class Table {
         }, 0) / historicalData.length * 100);
         this.lastItemOfArray = historicalDataForTable.slice(-1).pop();
         this.view = appendChildren(elementFromHTMLString('<span class=table__view></span>'),
-            elementFromHTMLString('<span class=table__historicalChange>Contagio Diario Promedio</span>'),
+            elementFromHTMLString('<span class=table__historicalChange>Promedio de Contagio</span>'),
             elementFromHTMLString(`<span class=table__historicalNumber>${changeAverage}%</span>`),
             elementFromHTMLString('<span class=table__confirmedToday>Confirmados Hoy</span>'),
             elementFromHTMLString(`<span class=table__confirmedNumberToday>${this.lastItemOfArray.todayCases}</span>`),

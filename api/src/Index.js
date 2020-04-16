@@ -26,7 +26,6 @@ export class Index {
             .then(responseArray => {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
                 const puertoRico = responseArray[1].find(res => res.state == 'Puerto Rico');
-                console.log(getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)), getDateNoTime());
                 if (getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)).getTime() != getDateNoTime().getTime()) {
                     this.historicalData.push({ positive: puertoRico.cases, dateChecked: new Date() });
                     this.historicalDataForTable = [{ positive: puertoRico.cases, death: puertoRico.deaths, todayCases: puertoRico.todayCases, todayDeaths: puertoRico.todayDeaths }];
@@ -34,22 +33,27 @@ export class Index {
                     this.historicalDataForTable = [{ positive: this.historicalData[this.historicalData.length - 1].positive, death: this.historicalData[this.historicalData.length - 1].death, todayCases: this.historicalData[this.historicalData.length - 1].positiveIncrease, todayDeaths: this.historicalData[this.historicalData.length - 1].deathIncrease }];
                 }
                 this.view.appendChild(setElementClassList(new Graph(this.historicalData).view, 'index__graph'));
-                this.view.appendChild(new Table(this.historicalDataForTable).view)
+                this.view.appendChild(new Table(this.historicalDataForTable, this.historicalData).view)
             });
     }
 }
 class Table {
-    constructor(historicalData) {
-        console.log(historicalData);
-        this.lastItemOfArray = historicalData.slice(-1).pop();
+    constructor(historicalDataForTable, historicalData) {
+        const changeAverage = Math.round(historicalData.reduce((accumulator = 0, currentValue, currentIndex, array) => {
+            accumulator += (currentValue.positiveIncrease ? currentValue.positiveIncrease : 0) / currentValue.positive;
+            return accumulator;
+        }, 0) / historicalData.length * 100);
+        this.lastItemOfArray = historicalDataForTable.slice(-1).pop();
         this.view = appendChildren(elementFromHTMLString('<span class=table__view></span>'),
+            elementFromHTMLString('<span class=table__historicalChange>Historial de Contagio Diario</span>'),
+            elementFromHTMLString(`<span class=table__historicalNumber>${changeAverage}%</span>`),
             elementFromHTMLString('<span class=table__confirmedToday>Confirmados Hoy</span>'),
             elementFromHTMLString(`<span class=table__confirmedNumberToday>${this.lastItemOfArray.todayCases}</span>`),
-            elementFromHTMLString('<span class=table__deathToday>Muertos Hoy</span>'),
+            elementFromHTMLString('<span class=table__deathToday>Muertes Hoy</span>'),
             elementFromHTMLString(`<span class=table__deathNumberToday>${this.lastItemOfArray.todayDeaths}</span>`),
             elementFromHTMLString('<span class=table__confirmed>Total Confirmados</span>'),
             elementFromHTMLString(`<span class=table__confirmedNumber>${this.lastItemOfArray.positive}</span>`),
-            elementFromHTMLString('<span class=table__death>Total de Muertos</span>'),
+            elementFromHTMLString('<span class=table__death>Total de Muertes</span>'),
             elementFromHTMLString(`<span class=table__deathNumber>${this.lastItemOfArray.death}</span>`),
         )
     }

@@ -23,7 +23,6 @@ export class Graph {
         this.numberOfRows = Math.floor(this.highestNumber / this.magnitude) * this.magnitude;
         this.convertionFactor = this.numberOfRows / this.highestNumber;
         this.divisor = 2;
-        console.log(this.convertionFactor);
         this.view = elementFromHTMLString('<span class=graph__view></span>');
         this.view.style.height = (((Math.ceil(this.highestNumber / this.magnitude) * this.magnitude) / 10) / this.divisor) + 3 + 'rem';
         this.renderLine();

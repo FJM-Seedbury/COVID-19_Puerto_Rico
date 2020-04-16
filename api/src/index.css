@@ -48,7 +48,7 @@
 .table__view {
     grid-area: index_table;
     display: grid;
-    grid-template-areas: 'table_confirmedToday table_deathToday table_confirmed table_death' 'table_confirmed-numberToday table_death-numberToday table_confirmed-number table_death-number';
+    grid-template-areas: 'table_historicalChange table_confirmedToday table_deathToday table_confirmed table_death' 'table_change-numberToday table_confirmed-numberToday table_death-numberToday table_confirmed-number table_death-number';
     width: auto;
     height: auto;
     grid-template-rows: 2rem 2rem;
@@ -59,6 +59,10 @@
     margin: 3rem 0 0 auto;
     padding: 1rem 1rem 0 1rem;
     color: var(--dark_grey);
+}
+
+.table__historicalChange {
+    grid-area: table_historicalChange;
 }
 
 .table__confirmedToday {
@@ -77,9 +81,13 @@
     grid-area: table_death;
 }
 
-.table__confirmedToday, .table__deathToday, .table__confirmed, .table__death {
+.table__historicalChange, .table__confirmedToday, .table__deathToday, .table__confirmed, .table__death {
     text-align: center;
     border-bottom: thin solid var(--grey);
+}
+
+.table__historicalNumber {
+    grid-area: table_change-numberToday;
 }
 
 .table__deathNumberToday {
@@ -94,7 +102,7 @@
     grid-area: table_death-number;
 }
 
-.table__confirmedNumberToday, .table__deathNumberToday, .table__confirmedNumber, .table__deathNumber {
+.table__historicalNumber, .table__confirmedNumberToday, .table__deathNumberToday, .table__confirmedNumber, .table__deathNumber {
     padding-top: .5rem;
     text-align: center;
     color: var(--axis_font_color);

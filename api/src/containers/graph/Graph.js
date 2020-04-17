@@ -19,7 +19,8 @@ export class Graph {
         });
         this.numberOfColumns = this.historicalData.length + 1;
         this.highestNumber = this.findHighestValue();
-        this.magnitude = getMagnitude(this.highestNumber);
+        // this.magnitude = getMagnitude(this.highestNumber);
+        this.magnitude = 100;
         this.numberOfRows = Math.floor(this.highestNumber / this.magnitude) * this.magnitude;
         this.convertionFactor = this.numberOfRows / this.highestNumber;
         this.divisor = 2;

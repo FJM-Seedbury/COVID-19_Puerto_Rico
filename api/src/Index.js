@@ -21,7 +21,7 @@ export class Index {
         Promise.all([
             // httpRequest('http://covidtracking.com/api/states/daily?state=NY', 'GET'),
             httpRequest('https://covidtracking.com/api/states/daily?state=PR', 'GET'),
-            httpRequest('https://corona.lmao.ninja/states', 'GET')
+            httpRequest('https://corona.lmao.ninja/v2/states', 'GET')
         ])
             .then(responseArray => {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));

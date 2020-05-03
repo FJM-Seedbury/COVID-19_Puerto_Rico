@@ -24,7 +24,6 @@ export class Index {
             httpRequest('https://corona.lmao.ninja/v2/states', 'GET')
         ])
             .then(responseArray => {
-                console.log(responseArray);
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
                 const puertoRico = responseArray[1].find(res => res.state == 'Puerto Rico');
                 if (getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)).getTime() != getDateNoTime().getTime()) {
@@ -40,10 +39,7 @@ export class Index {
 }
 class Table {
     constructor(historicalDataForTable, historicalData) {
-        const changeAverage = Math.round(historicalData.reduce((accumulator = 0, currentValue, currentIndex, array) => {
-            accumulator += (currentValue.positiveIncrease ? currentValue.positiveIncrease : 0) / currentValue.positive;
-            return accumulator;
-        }, 0) / historicalData.length * 100);
+        const changeAverage = this.getChangeAverage(historicalData);
         this.lastItemOfArray = historicalDataForTable.slice(-1).pop();
         this.view = appendChildren(elementFromHTMLString('<span class=table__view></span>'),
             elementFromHTMLString('<span class=table__historicalChange>Promedio de Contagio</span>'),
@@ -57,5 +53,21 @@ class Table {
             elementFromHTMLString('<span class=table__death>Total de Muertes</span>'),
             elementFromHTMLString(`<span class=table__deathNumber>${this.lastItemOfArray.death}</span>`),
         )
+    }
+    getChangeAverage(historicalData) {
+        const filteredHistoricalData = this.getLastNDays(historicalData, 10);
+        console.log(filteredHistoricalData);
+        return Math.round(filteredHistoricalData.reduce((accumulator = 0, currentValue, currentIndex, array) => {
+            accumulator += (currentValue.positiveIncrease ? currentValue.positiveIncrease : 0) / currentValue.positive;
+            return accumulator;
+        }, 0) / filteredHistoricalData.length * 100);
+    }
+    getLastNDays(historicalData, n = 10) {
+        const newArray = [];
+        const startIndex = historicalData.length - n < 0 ? 0 : historicalData.length - n;
+        for (let i = startIndex, l = historicalData.length; i < l; i++) {
+            newArray.push(historicalData[i]);
+        }
+        return newArray;
     }
 }

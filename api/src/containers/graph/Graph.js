@@ -69,7 +69,7 @@ class YAxis {
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__yAxis></span>`),
             ...Array.apply(null, Array(numberOfRows)).map((n, index) => {
                 const value = numberOfRows * ((numberOfRows - (index)) / numberOfRows) * magnitude;
-                const rowElement = elementFromHTMLString(`<h3 class=yAxis__row>${Match.trunc(value)}</h3>`);
+                const rowElement = elementFromHTMLString(`<h3 class=yAxis__row>${Math.trunc(value)}</h3>`);
                 // rowElement.style.gridArea = gridArea + index;
                 // rowElement.style.gridArea = gridArea;
                 // gridAreas += `"${gridArea + index} "`;

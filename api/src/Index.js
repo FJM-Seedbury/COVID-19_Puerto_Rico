@@ -20,7 +20,7 @@ export class Index {
         );
         Promise.all([
             // httpRequest('http://covidtracking.com/api/states/daily?state=NY', 'GET'),
-            httpRequest('https://covidtracking.com/api/v1/states/PR/daily.json', 'GET'),
+            httpRequest('https://covidtracking.com/api/v1/states/pr/daily.json', 'GET'),
             httpRequest('https://corona.lmao.ninja/v2/states', 'GET')
         ])
             .then(responseArray => {

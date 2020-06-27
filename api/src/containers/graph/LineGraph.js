@@ -71,22 +71,24 @@ export class LineGraph {
                 return {
                     x: (remXPerPoint * index) - 160,
                     // x: (remXPerPoint * index),
+                    // x:  index,
                     y: -(point.y * percentOfYPerPoint) + (canvasHeight)
                 };
             });
             console.log('yMax', yMax);
+            console.log('remXPerPoint', remXPerPoint);
             console.log('percentOfYPerPoint', percentOfYPerPoint);
             if (points[0]) {
                 this.setDimentionRatio();
                 let lastPoint = points[0];
-                lastPoint = { x: 0, y: canvasHeight };
+                // lastPoint = { x: 0, y: canvasHeight };
                 points.forEach(point => {
                     this.draw(lastPoint, point);
                     lastPoint = point;
                 });
                 // this.test(canvasHeight);
             }
-        }, 50);
+        }, 100);
     }
     draw(lastPoint, point) {
         console.log(point);

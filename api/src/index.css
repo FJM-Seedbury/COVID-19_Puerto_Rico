@@ -34,6 +34,8 @@
 .index__graph {
     grid-area: index_graph;
     margin: 0 auto;
+    width: calc(100vw - 5rem);
+height: calc(100vh - 25rem);
 }
 
 .index__sS-image {

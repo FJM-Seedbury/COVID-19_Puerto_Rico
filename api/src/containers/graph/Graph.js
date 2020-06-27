@@ -19,10 +19,11 @@ export class Graph {
         });
         this.numberOfColumns = this.historicalData.length + 1;
         this.highestNumber = this.findHighestValue();
-        this.magnitude = getMagnitude(this.highestNumber);
+        // this.magnitude = getMagnitude(this.highestNumber);
+        this.magnitude = 100;
         this.numberOfRows = Math.floor(this.highestNumber / this.magnitude) * this.magnitude;
         this.convertionFactor = this.numberOfRows / this.highestNumber;
-        this.divisor = 2;
+        this.divisor = 6;
         this.view = elementFromHTMLString('<span class=graph__view></span>');
         this.view.style.height = (((Math.ceil(this.highestNumber / this.magnitude) * this.magnitude) / 10) / this.divisor) + 3 + 'rem';
         this.renderLine();
@@ -68,7 +69,7 @@ class YAxis {
         this.view = appendChildren(elementFromHTMLString(`<span class=graph__yAxis></span>`),
             ...Array.apply(null, Array(numberOfRows)).map((n, index) => {
                 const value = numberOfRows * ((numberOfRows - (index)) / numberOfRows) * magnitude;
-                const rowElement = elementFromHTMLString(`<h3 class=yAxis__row>${value}</h3>`);
+                const rowElement = elementFromHTMLString(`<h3 class=yAxis__row>${Math.trunc(value)}</h3>`);
                 // rowElement.style.gridArea = gridArea + index;
                 // rowElement.style.gridArea = gridArea;
                 // gridAreas += `"${gridArea + index} "`;

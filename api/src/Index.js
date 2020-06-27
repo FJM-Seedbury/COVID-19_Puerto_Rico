@@ -20,8 +20,8 @@ export class Index {
         );
         Promise.all([
             // httpRequest('http://covidtracking.com/api/states/daily?state=NY', 'GET'),
-            httpRequest('https://covidtracking.com/api/states/daily?state=PR', 'GET'),
-            httpRequest('https://corona.lmao.ninja/states', 'GET')
+            httpRequest('https://covidtracking.com/api/v1/states/pr/daily.json', 'GET'),
+            httpRequest('https://corona.lmao.ninja/v2/states', 'GET')
         ])
             .then(responseArray => {
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
@@ -39,13 +39,10 @@ export class Index {
 }
 class Table {
     constructor(historicalDataForTable, historicalData) {
-        const changeAverage = Math.round(historicalData.reduce((accumulator = 0, currentValue, currentIndex, array) => {
-            accumulator += (currentValue.positiveIncrease ? currentValue.positiveIncrease : 0) / currentValue.positive;
-            return accumulator;
-        }, 0) / historicalData.length * 100);
+        const changeAverage = this.getChangeAverage(historicalData);
         this.lastItemOfArray = historicalDataForTable.slice(-1).pop();
         this.view = appendChildren(elementFromHTMLString('<span class=table__view></span>'),
-            elementFromHTMLString('<span class=table__historicalChange>Historial de Contagio Diario</span>'),
+            elementFromHTMLString('<span class=table__historicalChange>Promedio de Contagio</span>'),
             elementFromHTMLString(`<span class=table__historicalNumber>${changeAverage}%</span>`),
             elementFromHTMLString('<span class=table__confirmedToday>Confirmados Hoy</span>'),
             elementFromHTMLString(`<span class=table__confirmedNumberToday>${this.lastItemOfArray.todayCases}</span>`),
@@ -56,5 +53,21 @@ class Table {
             elementFromHTMLString('<span class=table__death>Total de Muertes</span>'),
             elementFromHTMLString(`<span class=table__deathNumber>${this.lastItemOfArray.death}</span>`),
         )
+    }
+    getChangeAverage(historicalData) {
+        const filteredHistoricalData = this.getLastNDays(historicalData, 10);
+        console.log(filteredHistoricalData);
+        return Math.round(filteredHistoricalData.reduce((accumulator = 0, currentValue, currentIndex, array) => {
+            accumulator += (currentValue.positiveIncrease ? currentValue.positiveIncrease : 0) / currentValue.positive;
+            return accumulator;
+        }, 0) / filteredHistoricalData.length * 100);
+    }
+    getLastNDays(historicalData, n = 10) {
+        const newArray = [];
+        const startIndex = historicalData.length - n < 0 ? 0 : historicalData.length - n;
+        for (let i = startIndex, l = historicalData.length; i < l; i++) {
+            newArray.push(historicalData[i]);
+        }
+        return newArray;
     }
 }

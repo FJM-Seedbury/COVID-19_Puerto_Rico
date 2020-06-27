@@ -8,7 +8,7 @@
 
 import { elementFromHTMLString } from './utilities/renderer.js'
 import { httpRequest, sortObjArray, setElementClassList, appendChildren, getDateNoTime } from './utilities/helpers.js';
-import { Graph } from './containers/graph/Graph.js';
+import { LineGraph } from './containers/graph/LineGraph.js';
 
 export class Index {
     constructor() {
@@ -32,9 +32,24 @@ export class Index {
                 } else {
                     this.historicalDataForTable = [{ positive: this.historicalData[this.historicalData.length - 1].positive, death: this.historicalData[this.historicalData.length - 1].death, todayCases: this.historicalData[this.historicalData.length - 1].positiveIncrease, todayDeaths: this.historicalData[this.historicalData.length - 1].deathIncrease }];
                 }
-                this.view.appendChild(setElementClassList(new Graph(this.historicalData).view, 'index__graph'));
-                this.view.appendChild(new Table(this.historicalDataForTable, this.historicalData).view)
+                const graph = new LineGraph();
+                this.view.appendChild(setElementClassList(graph.view, 'index__graph'));
+                this.view.appendChild(new Table(this.historicalDataForTable, this.historicalData).view);
+                graph.setView(this.parseGraphData(this.historicalData));
             });
+    }
+    parseGraphData(historicalData) {
+        // console.log(historicalData);
+        return {
+            xAxisLabel: 'Dates',
+            yAxisLabel: 'Confirmed',
+            points: historicalData.map(data => {
+                return {
+                    x: new Date(data.dateChecked),
+                    y: data.positive
+                }
+            })
+        };
     }
 }
 class Table {
@@ -56,7 +71,7 @@ class Table {
     }
     getChangeAverage(historicalData) {
         const filteredHistoricalData = this.getLastNDays(historicalData, 10);
-        console.log(filteredHistoricalData);
+        // console.log(filteredHistoricalData);
         return Math.round(filteredHistoricalData.reduce((accumulator = 0, currentValue, currentIndex, array) => {
             accumulator += (currentValue.positiveIncrease ? currentValue.positiveIncrease : 0) / currentValue.positive;
             return accumulator;

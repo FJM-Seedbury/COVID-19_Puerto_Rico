@@ -12,6 +12,7 @@ import { Graph } from './containers/graph/Graph.js';
 
 export class Index {
     constructor() {
+        console.log('test');
         this.view = appendChildren(elementFromHTMLString('<span class=index__view></span>'),
             elementFromHTMLString('<img src="./api/src/img/Covid-dark.png" class=index__covid-image></img>'),
             elementFromHTMLString('<h1 class=index__header>COVID-19 | Puerto Rico</h1>'),
@@ -21,9 +22,12 @@ export class Index {
         Promise.all([
             // httpRequest('http://covidtracking.com/api/states/daily?state=NY', 'GET'),
             httpRequest('http://covidtracking.com/api/states/daily?state=PR', 'GET'),
-            httpRequest('https://corona.lmao.ninja/states', 'GET')
+            // httpRequest('https://corona.lmao.ninja/states', 'GET')
+            httpRequest('https://corona.lmao.ninja/v3/covid-19/states', 'GET')
+
         ])
             .then(responseArray => {
+                console.log(responseArray);
                 this.historicalData = responseArray[0].sort(sortObjArray('date'));
                 const puertoRico = responseArray[1].find(res => res.state == 'Puerto Rico');
                 console.log(getDateNoTime(new Date(this.historicalData[this.historicalData.length - 1].dateChecked)), getDateNoTime());

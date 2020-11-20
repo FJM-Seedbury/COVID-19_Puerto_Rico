@@ -1,63 +1,93 @@
 /**
- * graph.css
- * @author Francisco J. Medina <francisco@seedburysquare.com>
- * @copyright Seedbury Square, LLC. All Rights Reserved.
- * 
- * @version 2020-04-04 Initial Version 
- */
+* graph.css
+* @author Francisco J. Medina <francisco@seedburysquare.com>
+* @copyright Seedbury Square, LLC. All Rights Reserved.
+*
+* @version 2020-06-19 Initial Version
+*/
 
 .graph__view {
-    background-color: var(--graphBackground_color);
     display: grid;
-    grid-template-rows: 50rem auto;
-    height: fit-content;
-    width: calc(100vw - 5rem);
-    align-items: flex-end;
-    justify-content: center;
+    grid-template-areas: 'graph_yAxisLabel graph_yAxis graph_topBuffer' 'graph_yAxisLabel graph_yAxis graph_canvas' 'graph_yAxisLabel graph_yAxis graph_xAxis' '. graph_xAxisLabel graph_xAxisLabel';
+    grid-template-rows: 1rem 1fr auto auto;
+    grid-template-columns: auto auto 1fr;
+    background-color: var(--graphBackground_color);
     box-shadow: var(--box-shadow-hover);
     border-radius: var(--rounded_border_radius) 0 var(--rounded_border_radius) var(--rounded_border_radius);
     margin-bottom: 3rem;
 }
 
-.graph__dataPoint {
-    height: 1.2rem;
-    width: auto;
-    margin: auto auto 0 auto;
-    font-size: 3rem;
-    cursor: default;
-    /* color: rgb(205, 3, 25); */
-    /* background-color: cadetblue; */
+.graph__yAxis, .graph__xAxis {
+    background-color: var(--graphBackground_color);
+    color: var(--axis_font_color);
+    font-size: .5rem;
 }
 
 .graph__yAxis {
-    height: 100%;
-    width: auto;
-    background-color: var(--axis_color);
-    display: grid;
-    border-radius: var(--rounded_border_radius) 0 0 0;
-    padding: 1rem 1rem 0 1rem;
+    grid-area: graph_yAxis;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+}
+
+.graph__yAxisLabel {
+    grid-area: graph_yAxisLabel;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--dark_grey);
+    font-size: .5rem;
+}
+
+.graph__yAxisLabel>* {
+    transform: rotate(-90deg);
+}
+
+.graph__xAxisLabel {
+    grid-area: graph_xAxisLabel;
+    display: flex;
+    justify-content: center;
+    padding: .5rem;
+    color: var(--dark_grey);
+    font-size: .5rem;
 }
 
 .graph__xAxis {
-    height: auto;
-    background-color: var(--axis_color);
-    width: 100%;
-    grid-area: xAxis;
-    display: grid;
-    align-items: center;
-    border-radius: 0 0 var(--rounded_border_radius) var(--rounded_border_radius);
-    padding: 1rem 0 1rem .5rem;
-    justify-content: space-around;
+    grid-area: graph_xAxis;
+    display: flex;
+    padding-right: 1rem;
+    justify-content: space-between;
 }
 
-.xAxis__column, .yAxis__row {
-    width: 100%;
-    text-align: center;
+.graph__yAxis__cero {
+    margin: auto auto 0 auto;
+}
+
+.graph__yAxis__mid {
+    margin: auto;
+}
+
+.graph__yAxis__last {
+    margin: 0 auto auto auto;
+}
+
+.graph__xAxis__cero {
+    margin: auto auto auto 0;
+}
+
+.graph__xAxis__mid {
+    margin: auto;
+}
+
+.graph__xAxis__last {
+    margin: auto 0 auto auto;
+}
+
+.graph__canvas {
+    grid-area: graph_canvas;
     color: var(--axis_font_color);
-    font-size: 1rem;
-}
-
-.graph__container {
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: calc(100% - 5em);
 }

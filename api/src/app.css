@@ -46,14 +46,16 @@ html {
     --rounded_border_radius: .4rem;
     /* Custom Colors */
     --axis_color: rgb(0, 208, 251);
-    --graphBackground_color: rgb(136, 154, 239);
-    --axis_color: rgb(235, 243, 250);
-    --graphBackground_color: rgb(240, 248, 255);
-    --axis_font_color: rgb(184,24,49);
-    --
+    /* --graphBackground_color: rgb(136, 154, 239); */
+    --graphBackground_color: rgb(230, 230, 230);
+    /* --axis_color: rgb(235, 243, 250); */
+    --axis_color: rgb(220, 220, 220);
+    /* --graphBackground_color: rgb(240, 248, 255); */
+    --axis_font_color: rgb(184, 24, 49);
 }
 
 #root {
     width: 100vw;
     height: 100vh;
+    background-color: var(--background_color);
 }

@@ -16,14 +16,53 @@
 
 /*Mobile Optimization*/
 
+@media screen and (max-width:1000px) {
+    html {
+        font-size: 70%;
+    }
+    /* .graph__xAxis {
+        padding: 1rem 1rem 1rem .5rem;
+    } */
+}
+
 @media screen and (max-width:800px) {
     html {
         font-size: 50%;
     }
+    .graph__xAxis {
+        padding: 1rem 1rem 0 .3rem;
+    }
+}
+
+@media screen and (max-width:700px) {
+    html {
+        font-size: 40%;
+    }
+    /* .graph__xAxis {
+        padding: 1rem 1rem 1rem .5rem;
+    } */
 }
 
 @media screen and (max-width:600px) {
     html {
-        font-size: 35%;
+        font-size: 20%;
     }
+    .table__view span, .xAxis__column, .yAxis__row {
+        font-size: 6px;
+    }
+    /* .graph__xAxis {
+        padding: 1rem 1rem 1rem .5rem;
+    } */
+}
+
+@media screen and (max-width:400px) {
+    html {
+        font-size: 15%;
+    }
+    .table__view span, .xAxis__column, .yAxis__row {
+        font-size: 5px;
+    }
+    /* .graph__xAxis {
+        padding: 1rem 1rem 1rem 1.5rem;
+    } */
 }

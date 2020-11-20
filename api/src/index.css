@@ -7,17 +7,15 @@
  */
 
 .index__view {
-    height: 100vh;
+    height: auto;
     width: 100vw;
     background-color: var(--background_color);
     display: grid;
     grid-template-areas: 'index_img index_header''index_table index_table' 'index_graph index_graph' 'sS_logo sS_logo';
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     justify-content: center;
     align-items: flex-start;
     padding-top: 2rem;
-    /* grid-gap: 2rem; */
-    grid-column-gap: 2rem;
 }
 
 .index__covid-image {
@@ -30,12 +28,14 @@
 .index__header {
     margin: auto auto auto 0;
     color: white;
-    font-size: 2.4rem;
+    font-size: 3rem;
 }
 
 .index__graph {
     grid-area: index_graph;
     margin: 0 auto;
+    width: calc(100vw - 5rem);
+height: calc(100vh - 25rem);
 }
 
 .index__sS-image {
@@ -45,81 +45,68 @@
     margin: 0 1rem auto auto;
 }
 
+/* Top Tab */
+
 .table__view {
     grid-area: index_table;
     display: grid;
-    grid-template-areas: 'table_confirmedToday table_deathToday table_confirmed table_death' 'table_confirmed-numberToday table_death-numberToday table_confirmed-number table_death-number';
+    grid-template-areas: 'table_historicalChange table_confirmedToday table_deathToday table_confirmed table_death' 'table_change-numberToday table_confirmed-numberToday table_death-numberToday table_confirmed-number table_death-number';
     width: auto;
-    /* height: 500px; */
+    height: auto;
     grid-template-rows: 2rem 2rem;
     grid-template-columns: repeat(4, auto);
-    /* border-style: solid; */
-    /* background-color:var(--graphBackground_color); */
     background-color: var(--axis_color);
-    /* border-bottom: thin solid rgb(73,73,73); */
     border-width: 0.1rem;
     border-radius: var(--rounded_border_radius) var(--rounded_border_radius) 0 0;
-    /* position: absolute; */
     margin: 3rem 0 0 auto;
-    /* box-shadow: var(--box-shadow-hover); */
     padding: 1rem 1rem 0 1rem;
     color: var(--dark_grey);
 }
 
+.table__historicalChange {
+    grid-area: table_historicalChange;
+}
+
 .table__confirmedToday {
-    text-align: center;
     grid-area: table_confirmedToday;
-    border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
-    border-width: .1rem;
 }
 
 .table__deathToday {
-    text-align: center;
     grid-area: table_deathToday;
-    border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
-}
-
-.table__confirmedNumberToday {
-    padding-top: .5rem;
-    text-align: center;
-    grid-area: table_confirmed-numberToday;
-    color: var(--axis_font_color);
-}
-
-.table__deathNumberToday {
-    padding-top: .5rem;
-    text-align: center;
-    grid-area: table_death-numberToday;
-    color: var(--axis_font_color);
 }
 
 .table__confirmed {
-    text-align: center;
     grid-area: table_confirmed;
-    border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
 }
 
 .table__death {
-    text-align: center;
     grid-area: table_death;
+}
+
+.table__historicalChange, .table__confirmedToday, .table__deathToday, .table__confirmed, .table__death {
+    text-align: center;
     border-bottom: thin solid var(--grey);
-    /* color: var(--axis_font_color); */
+}
+
+.table__historicalNumber {
+    grid-area: table_change-numberToday;
+}
+
+.table__deathNumberToday {
+    grid-area: table_death-numberToday;
 }
 
 .table__confirmedNumber {
-    padding-top: .5rem;
-    text-align: center;
     grid-area: table_confirmed-number;
-    color: var(--axis_font_color);
 }
 
 .table__deathNumber {
+    grid-area: table_death-number;
+}
+
+.table__historicalNumber, .table__confirmedNumberToday, .table__deathNumberToday, .table__confirmedNumber, .table__deathNumber {
     padding-top: .5rem;
     text-align: center;
-    grid-area: table_death-number;
     color: var(--axis_font_color);
 }
 
